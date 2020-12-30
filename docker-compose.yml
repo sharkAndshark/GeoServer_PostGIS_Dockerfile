@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+  geoserver:
+    ports:
+      - "8080:8080"
+    image: "zhangasyncjun/geoserver_cnfonts:2.17.4"
+    volumes:
+      - ./data/geoserver/data_dir:/var/local/geoserver
+      - ./data/geoserver/exts_dir:/var/local/geoserver-exts
+      - ./data/geoserver/config_dir:/usr/local/tomcat/conf/Catelina/localhost
+    links:
+      - postgis
+
+  postgis:
+    image: "mdillon/postgis:latest"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/postgis:/var/lib/postgresql/data
